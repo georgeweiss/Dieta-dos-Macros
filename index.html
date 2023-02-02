@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <script>
+      function calcularMacronutrientes() {
+        // Obtém o peso do usuário
+        var peso = parseFloat(document.getElementById("peso").value);
+
+        // Obtém as proporções diárias de carboidratos, proteínas e gorduras
+        var proporcaoCarboidratos = parseFloat(document.getElementById("carboidratos").value);
+        var proporcaoProteinas = parseFloat(document.getElementById("proteinas").value);
+        var proporcaoGorduras = parseFloat(document.getElementById("gorduras").value);
+
+        // Calcula as gramas de carboidratos, proteínas e gorduras
+        var gramasCarboidratos = peso * proporcaoCarboidratos;
+        var gramasProteinas = peso * proporcaoProteinas;
+        var gramasGorduras = peso * proporcaoGorduras;
+
+        // Calcula as kcal de carboidratos, proteínas e gorduras
+        var kcalCarboidratos = gramasCarboidratos * 4;
+        var kcalProteinas = gramasProteinas * 4;
+        var kcalGorduras = gramasGorduras * 9;
+
+        // Calcula o total de kcal
+        var totalKcal = kcalCarboidratos + kcalProteinas + kcalGorduras;
+
+        // Calcula as porcentagens de carboidratos, proteínas e gorduras
+        var porcentagemCarboidratos = (kcalCarboidratos / totalKcal) * 100;
+        var porcentagemProteinas = (kcalProteinas / totalKcal) * 100;
+        var porcentagemGorduras = (kcalGorduras / totalKcal) * 100;
+
+        // Exibe o resultado
+        document.getElementById("resultado").innerHTML =
+          "Carboidratos: " + gramasCarboidratos.toFixed(2) + "g / " + kcalCarboidratos.toFixed(2) + "kcal / " + porcentagemCarboidratos.toFixed(2) + "%<br>" +
+          "Proteínas: " + gramasProteinas.toFixed(2) + "g / " + kcalProteinas.toFixed(2) + "kcal / " + porcentagemProteinas.toFixed(2) + "%<br>" +
+          "Gorduras: " + gramasGorduras.toFixed(2) + "g / " + kcalGorduras.toFixed(2) + "kcal / " + porcentagemGorduras.toFixed(2) + "%";
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Dieta dos Macros</h1>
+    <p>
+      Peso (kg): <input type="text" id="peso">
+</p>
+    <p>
+      Carboidratos: <input type="text" id="carboidratos">
+    </p>
+    <p>
+      Proteínas: <input type="text" id="proteinas">
+    </p>
+    <p>
+      Gorduras: <input type="text" id="gorduras">
+    </p>
+    <p>
+      <button onclick="calcularMacronutrientes()">Calcular</button>
+    </p>
+    <p id="resultado"></p>
+  </body>
+</html>
