@@ -9,25 +9,15 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-:root {
-–bg: #0a0b0d;
-–surface: #111318;
-–card: #161a22;
-–border: #222733;
-–accent: #00e5ff;
-–accent2: #ff6b35;
-–protein: #a8ff78;
-–carb: #00e5ff;
-–fat: #ff6b35;
-–text: #eef0f5;
-–muted: #6b7280;
-–radius: 16px;
+html, body {
+background: #0a0b0d !important;
+min-height: 100vh;
 }
 
 body {
 font-family: ‘DM Sans’, sans-serif;
-background: var(–bg);
-color: var(–text);
+background: #0a0b0d !important;
+color: #eef0f5;
 min-height: 100vh;
 display: flex;
 flex-direction: column;
@@ -87,15 +77,15 @@ font-size: 11px;
 font-weight: 600;
 letter-spacing: 0.12em;
 text-transform: uppercase;
-color: var(–accent);
+color: #00e5ff;
 margin-bottom: 20px;
 }
 
 .logo-dot {
 width: 6px; height: 6px;
 border-radius: 50%;
-background: var(–accent);
-box-shadow: 0 0 8px var(–accent);
+background: #00e5ff;
+box-shadow: 0 0 8px #00e5ff;
 animation: pulse 2s infinite;
 }
 
@@ -109,7 +99,7 @@ font-family: ‘Bebas Neue’, sans-serif;
 font-size: clamp(42px, 10vw, 64px);
 letter-spacing: 0.04em;
 line-height: 0.95;
-background: linear-gradient(135deg, #fff 30%, var(–accent) 100%);
+background: linear-gradient(135deg, #fff 30%, #00e5ff 100%);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 background-clip: text;
@@ -117,15 +107,15 @@ margin-bottom: 10px;
 }
 
 .subtitle {
-color: var(–muted);
+color: #6b7280;
 font-size: 13px;
 letter-spacing: 0.02em;
 }
 
 .card {
-background: var(–card);
-border: 1px solid var(–border);
-border-radius: var(–radius);
+background: #161a22;
+border: 1px solid #222733;
+border-radius: 16px;
 padding: 28px;
 margin-bottom: 16px;
 animation: fadeUp 0.6s ease both;
@@ -136,20 +126,19 @@ font-size: 11px;
 font-weight: 600;
 letter-spacing: 0.12em;
 text-transform: uppercase;
-color: var(–muted);
+color: #6b7280;
 margin-bottom: 20px;
 }
 
 .fields { display: flex; flex-direction: column; gap: 14px; }
-
-.field { display: flex; flex-direction: column; gap: 7px; }
+.field  { display: flex; flex-direction: column; gap: 7px; }
 
 label {
 font-size: 11px;
 font-weight: 600;
 letter-spacing: 0.08em;
 text-transform: uppercase;
-color: var(–muted);
+color: #6b7280;
 display: flex;
 align-items: center;
 gap: 8px;
@@ -157,17 +146,17 @@ gap: 8px;
 
 .label-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
 .ld-weight { background: #c084fc; box-shadow: 0 0 8px #c084fc; }
-.ld-carb   { background: var(–carb);    box-shadow: 0 0 8px var(–carb); }
-.ld-prot   { background: var(–protein); box-shadow: 0 0 8px var(–protein); }
-.ld-fat    { background: var(–fat);     box-shadow: 0 0 8px var(–fat); }
+.ld-carb   { background: #00e5ff; box-shadow: 0 0 8px #00e5ff; }
+.ld-prot   { background: #a8ff78; box-shadow: 0 0 8px #a8ff78; }
+.ld-fat    { background: #ff6b35; box-shadow: 0 0 8px #ff6b35; }
 
 .input-wrap { position: relative; display: flex; align-items: center; }
 
 input[type=“number”] {
-background: var(–surface);
-border: 1px solid var(–border);
+background: #111318;
+border: 1px solid #222733;
 border-radius: 12px;
-color: var(–text);
+color: #eef0f5;
 font-family: ‘DM Mono’, monospace;
 font-size: 20px;
 font-weight: 500;
@@ -182,7 +171,7 @@ input[type=“number”]::-webkit-outer-spin-button,
 input[type=“number”]::-webkit-inner-spin-button { -webkit-appearance: none; }
 
 input[type=“number”]:focus {
-border-color: var(–accent);
+border-color: #00e5ff;
 box-shadow: 0 0 0 3px rgba(0,229,255,0.1);
 background: #0e1117;
 }
@@ -195,13 +184,13 @@ right: 16px;
 font-size: 11px;
 font-weight: 600;
 letter-spacing: 0.06em;
-color: var(–muted);
+color: #6b7280;
 pointer-events: none;
 font-family: ‘DM Sans’, sans-serif;
 text-transform: uppercase;
 }
 
-.divider { border: none; border-top: 1px solid var(–border); margin: 6px 0; }
+.divider { border: none; border-top: 1px solid #222733; margin: 6px 0; }
 
 .btn-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-top: 22px; }
 
@@ -218,7 +207,7 @@ letter-spacing: 0.02em;
 }
 
 .btn-primary {
-background: var(–accent);
+background: #00e5ff;
 color: #000;
 position: relative;
 overflow: hidden;
@@ -239,12 +228,12 @@ transition: opacity 0.2s;
 
 .btn-secondary {
 background: transparent;
-border: 1px solid var(–border);
-color: var(–muted);
+border: 1px solid #222733;
+color: #6b7280;
 padding: 15px 18px;
 }
 
-.btn-secondary:hover { border-color: var(–accent2); color: var(–accent2); background: rgba(255,107,53,0.05); }
+.btn-secondary:hover { border-color: #ff6b35; color: #ff6b35; background: rgba(255,107,53,0.05); }
 
 .error-msg {
 display: none;
@@ -253,21 +242,20 @@ border: 1px solid rgba(255,107,53,0.3);
 border-radius: 10px;
 padding: 11px 16px;
 font-size: 13px;
-color: var(–accent2);
+color: #ff6b35;
 margin-top: 12px;
 text-align: center;
 }
 .error-msg.show { display: block; }
 
-/* Results */
 #results { display: none; }
 #results.visible { display: block; animation: fadeUp 0.5s ease both; }
 
 .macro-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
 
 .macro-row {
-background: var(–surface);
-border: 1px solid var(–border);
+background: #111318;
+border: 1px solid #222733;
 border-radius: 14px;
 padding: 14px 18px;
 display: grid;
@@ -290,15 +278,15 @@ font-size: 14px; flex-shrink: 0;
 .macro-name {
 font-size: 11px; font-weight: 600;
 text-transform: uppercase; letter-spacing: 0.08em;
-color: var(–muted); margin-bottom: 3px;
+color: #6b7280; margin-bottom: 3px;
 }
 
 .macro-detail {
 font-family: ‘DM Mono’, monospace;
-font-size: 13px; color: var(–text);
+font-size: 13px; color: #eef0f5;
 }
 
-.macro-detail .sep { color: #2a3040; margin: 0 5px; }
+.sep { color: #2a3040; margin: 0 5px; }
 
 .macro-sub {
 font-family: ‘DM Mono’, monospace;
@@ -310,13 +298,13 @@ font-family: ‘DM Mono’, monospace;
 font-size: 17px; font-weight: 600; text-align: right;
 }
 
-.pct-carb { color: var(–carb); }
-.pct-prot { color: var(–protein); }
-.pct-fat  { color: var(–fat); }
+.pct-carb { color: #00e5ff; }
+.pct-prot { color: #a8ff78; }
+.pct-fat  { color: #ff6b35; }
 
 .bar-container {
-background: var(–surface);
-border: 1px solid var(–border);
+background: #111318;
+border: 1px solid #222733;
 border-radius: 14px;
 padding: 18px; margin-bottom: 16px;
 }
@@ -324,7 +312,7 @@ padding: 18px; margin-bottom: 16px;
 .bar-label {
 font-size: 11px; font-weight: 600;
 text-transform: uppercase; letter-spacing: 0.1em;
-color: var(–muted); margin-bottom: 10px;
+color: #6b7280; margin-bottom: 10px;
 }
 
 .bar-track {
@@ -334,15 +322,15 @@ display: flex; margin-bottom: 10px;
 }
 
 .bar-seg { height: 100%; transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); }
-.bar-seg.carb { background: var(–carb); }
-.bar-seg.prot { background: var(–protein); }
-.bar-seg.fat  { background: var(–fat); }
+.bar-seg.carb { background: #00e5ff; }
+.bar-seg.prot { background: #a8ff78; }
+.bar-seg.fat  { background: #ff6b35; }
 
 .bar-legend { display: flex; gap: 14px; flex-wrap: wrap; }
 
 .legend-item {
 display: flex; align-items: center; gap: 5px;
-font-size: 11px; color: var(–muted); font-weight: 500;
+font-size: 11px; color: #6b7280; font-weight: 500;
 }
 
 .legend-dot { width: 7px; height: 7px; border-radius: 50%; }
@@ -357,7 +345,7 @@ padding: 24px; text-align: center;
 .total-label {
 font-size: 11px; font-weight: 600;
 letter-spacing: 0.12em; text-transform: uppercase;
-color: var(–accent); margin-bottom: 6px;
+color: #00e5ff; margin-bottom: 6px;
 }
 
 .total-val {
@@ -366,12 +354,16 @@ font-size: 52px; letter-spacing: 0.04em;
 color: #fff; line-height: 1;
 }
 
-.total-unit { font-family: ‘DM Mono’, monospace; font-size: 13px; color: var(–muted); margin-top: 4px; }
+.total-unit {
+font-family: ‘DM Mono’, monospace;
+font-size: 13px; color: #6b7280; margin-top: 4px;
+}
 
 @keyframes fadeDown {
 from { opacity: 0; transform: translateY(-20px); }
 to   { opacity: 1; transform: translateY(0); }
 }
+
 @keyframes fadeUp {
 from { opacity: 0; transform: translateY(20px); }
 to   { opacity: 1; transform: translateY(0); }
@@ -436,7 +428,7 @@ position: relative; z-index: 1;
 </div>
 
 <div class="btn-row">
-  <button class="btn btn-primary" onclick="calculate()">Calcular →</button>
+  <button class="btn btn-primary" onclick="calculate()">Calcular &rarr;</button>
   <button class="btn btn-secondary" onclick="resetAll()">Limpar</button>
 </div>
 
@@ -452,33 +444,33 @@ position: relative; z-index: 1;
 ```
   <div class="macro-grid">
     <div class="macro-row">
-      <div class="macro-icon carb">🌾</div>
+      <div class="macro-icon carb">&#127806;</div>
       <div>
         <div class="macro-name">Carboidratos</div>
-        <div class="macro-detail" id="res-carb-detail">—</div>
-        <div class="macro-sub"    id="res-carb-sub"></div>
+        <div class="macro-detail" id="res-carb-detail">&#8212;</div>
+        <div class="macro-sub" id="res-carb-sub"></div>
       </div>
-      <div class="macro-pct pct-carb" id="res-carb-pct">—%</div>
+      <div class="macro-pct pct-carb" id="res-carb-pct">&#8212;%</div>
     </div>
 
     <div class="macro-row">
-      <div class="macro-icon prot">💪</div>
+      <div class="macro-icon prot">&#128170;</div>
       <div>
         <div class="macro-name">Proteínas</div>
-        <div class="macro-detail" id="res-prot-detail">—</div>
-        <div class="macro-sub"    id="res-prot-sub"></div>
+        <div class="macro-detail" id="res-prot-detail">&#8212;</div>
+        <div class="macro-sub" id="res-prot-sub"></div>
       </div>
-      <div class="macro-pct pct-prot" id="res-prot-pct">—%</div>
+      <div class="macro-pct pct-prot" id="res-prot-pct">&#8212;%</div>
     </div>
 
     <div class="macro-row">
-      <div class="macro-icon fat">🥑</div>
+      <div class="macro-icon fat">&#129361;</div>
       <div>
         <div class="macro-name">Gorduras</div>
-        <div class="macro-detail" id="res-fat-detail">—</div>
-        <div class="macro-sub"    id="res-fat-sub"></div>
+        <div class="macro-detail" id="res-fat-detail">&#8212;</div>
+        <div class="macro-sub" id="res-fat-sub"></div>
       </div>
-      <div class="macro-pct pct-fat" id="res-fat-pct">—%</div>
+      <div class="macro-pct pct-fat" id="res-fat-pct">&#8212;%</div>
     </div>
   </div>
 
@@ -490,9 +482,9 @@ position: relative; z-index: 1;
       <div class="bar-seg fat"  id="bar-fat"  style="width:0%"></div>
     </div>
     <div class="bar-legend">
-      <div class="legend-item"><div class="legend-dot" style="background:var(--carb)"></div>Carboidratos</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--protein)"></div>Proteínas</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--fat)"></div>Gorduras</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#00e5ff"></div>Carboidratos</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#a8ff78"></div>Proteínas</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#ff6b35"></div>Gorduras</div>
     </div>
   </div>
 
@@ -508,7 +500,7 @@ position: relative; z-index: 1;
 
 </div>
 
-<footer>Dieta dos Macros &copy; 2025 — Calculadora de Macronutrientes</footer>
+<footer>Dieta dos Macros &copy; 2025 &mdash; Calculadora de Macronutrientes</footer>
 
 <script>
   function fmtDec(n) {
@@ -519,11 +511,11 @@ position: relative; z-index: 1;
   }
 
   function calculate() {
-    const w  = parseFloat(document.getElementById('weight').value)  || 0;
-    const cr = parseFloat(document.getElementById('carbs').value)   || 0;
-    const pr = parseFloat(document.getElementById('protein').value) || 0;
-    const fr = parseFloat(document.getElementById('fat').value)     || 0;
-    const err = document.getElementById('error');
+    var w  = parseFloat(document.getElementById('weight').value)  || 0;
+    var cr = parseFloat(document.getElementById('carbs').value)   || 0;
+    var pr = parseFloat(document.getElementById('protein').value) || 0;
+    var fr = parseFloat(document.getElementById('fat').value)     || 0;
+    var err = document.getElementById('error');
 
     if (w <= 0 || (cr === 0 && pr === 0 && fr === 0)) {
       err.classList.add('show');
@@ -531,26 +523,24 @@ position: relative; z-index: 1;
     }
     err.classList.remove('show');
 
-    // Total grams = ratio (g/kg) × body weight (kg)
-    const cG = cr * w;
-    const pG = pr * w;
-    const fG = fr * w;
+    var cG = cr * w;
+    var pG = pr * w;
+    var fG = fr * w;
 
-    // Calories: carbs & protein = 4 kcal/g · fat = 9 kcal/g
-    const cKcal = cG * 4;
-    const pKcal = pG * 4;
-    const fKcal = fG * 9;
-    const total = cKcal + pKcal + fKcal;
+    var cKcal = cG * 4;
+    var pKcal = pG * 4;
+    var fKcal = fG * 9;
+    var total = cKcal + pKcal + fKcal;
 
-    const cPct = total > 0 ? (cKcal / total * 100) : 0;
-    const pPct = total > 0 ? (pKcal / total * 100) : 0;
-    const fPct = total > 0 ? (fKcal / total * 100) : 0;
+    var cPct = total > 0 ? (cKcal / total * 100) : 0;
+    var pPct = total > 0 ? (pKcal / total * 100) : 0;
+    var fPct = total > 0 ? (fKcal / total * 100) : 0;
 
     function setMacro(prefix, grams, kcal, pct, ratio, weight) {
       document.getElementById('res-' + prefix + '-detail').innerHTML =
-        `${fmtDec(grams)}g<span class="sep">·</span>${fmtInt(kcal)} kcal`;
+        fmtDec(grams) + 'g<span class="sep">&middot;</span>' + fmtInt(kcal) + ' kcal';
       document.getElementById('res-' + prefix + '-sub').textContent =
-        ratio > 0 ? `${fmtDec(ratio)} g/kg × ${fmtDec(weight)} kg` : '';
+        ratio > 0 ? fmtDec(ratio) + ' g/kg x ' + fmtDec(weight) + ' kg' : '';
       document.getElementById('res-' + prefix + '-pct').textContent = pct.toFixed(1) + '%';
     }
 
@@ -560,25 +550,31 @@ position: relative; z-index: 1;
 
     document.getElementById('total-kcal').textContent = fmtInt(total);
 
-    setTimeout(() => {
+    setTimeout(function() {
       document.getElementById('bar-carb').style.width = cPct + '%';
       document.getElementById('bar-prot').style.width = pPct + '%';
       document.getElementById('bar-fat').style.width  = fPct + '%';
     }, 50);
 
-    const results = document.getElementById('results');
+    var results = document.getElementById('results');
     results.classList.add('visible');
     results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
   function resetAll() {
-    ['weight','carbs','protein','fat'].forEach(id => document.getElementById(id).value = '');
+    ['weight','carbs','protein','fat'].forEach(function(id) {
+      document.getElementById(id).value = '';
+    });
     document.getElementById('error').classList.remove('show');
     document.getElementById('results').classList.remove('visible');
-    ['bar-carb','bar-prot','bar-fat'].forEach(id => document.getElementById(id).style.width = '0%');
+    ['bar-carb','bar-prot','bar-fat'].forEach(function(id) {
+      document.getElementById(id).style.width = '0%';
+    });
   }
 
-  document.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') calculate();
+  });
 </script>
 
 </body>
