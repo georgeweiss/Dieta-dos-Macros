@@ -4,10 +4,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dieta dos Macros</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Dieta dos Macros — Calculadora</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
 background: #0a0b0d !important;
@@ -22,7 +22,7 @@ min-height: 100vh;
 display: flex;
 flex-direction: column;
 align-items: center;
-padding: 48px 20px 80px;
+padding: 40px 20px 80px;
 position: relative;
 overflow-x: hidden;
 }
@@ -32,9 +32,9 @@ content: ‘’;
 position: fixed;
 inset: 0;
 background-image:
-linear-gradient(rgba(0,229,255,0.025) 1px, transparent 1px),
-linear-gradient(90deg, rgba(0,229,255,0.025) 1px, transparent 1px);
-background-size: 44px 44px;
+linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+background-size: 40px 40px;
 pointer-events: none;
 z-index: 0;
 }
@@ -42,129 +42,125 @@ z-index: 0;
 body::after {
 content: ‘’;
 position: fixed;
-top: -250px;
+top: -200px;
 left: 50%;
 transform: translateX(-50%);
-width: 800px;
-height: 800px;
-background: radial-gradient(circle, rgba(0,229,255,0.055) 0%, transparent 65%);
+width: 700px;
+height: 700px;
+background: radial-gradient(circle, rgba(0,229,255,0.07) 0%, transparent 70%);
 pointer-events: none;
 z-index: 0;
 }
 
 .wrapper {
 width: 100%;
-max-width: 440px;
+max-width: 480px;
 position: relative;
 z-index: 1;
 }
 
-/* ── Header ── */
 header {
 text-align: center;
-margin-bottom: 44px;
-animation: fadeDown 0.55s ease both;
+margin-bottom: 40px;
+animation: fadeDown 0.6s ease both;
 }
 
 .logo-tag {
 display: inline-flex;
 align-items: center;
 gap: 8px;
-background: rgba(0,229,255,0.07);
-border: 1px solid rgba(0,229,255,0.18);
+background: rgba(0,229,255,0.08);
+border: 1px solid rgba(0,229,255,0.2);
 border-radius: 99px;
-padding: 7px 18px;
-font-size: 10.5px;
+padding: 6px 16px;
+font-size: 11px;
 font-weight: 600;
-letter-spacing: 0.14em;
+letter-spacing: 0.12em;
 text-transform: uppercase;
 color: #00e5ff;
-margin-bottom: 22px;
+margin-bottom: 20px;
 }
 
 .logo-dot {
 width: 6px; height: 6px;
 border-radius: 50%;
 background: #00e5ff;
-box-shadow: 0 0 10px #00e5ff;
-animation: pulse 2.2s ease-in-out infinite;
+box-shadow: 0 0 8px #00e5ff;
+animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
 0%, 100% { opacity: 1; transform: scale(1); }
-50%       { opacity: 0.4; transform: scale(0.75); }
+50% { opacity: 0.5; transform: scale(0.8); }
 }
 
 h1 {
 font-family: ‘Bebas Neue’, sans-serif;
-font-size: clamp(48px, 13vw, 68px);
-letter-spacing: 0.03em;
-line-height: 0.92;
-background: linear-gradient(150deg, #ffffff 25%, #00e5ff 100%);
+font-size: clamp(42px, 10vw, 64px);
+letter-spacing: 0.04em;
+line-height: 0.95;
+background: linear-gradient(135deg, #fff 30%, #00e5ff 100%);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 background-clip: text;
-margin-bottom: 12px;
+margin-bottom: 10px;
 }
 
 .subtitle {
-color: #525c6e;
+color: #6b7280;
 font-size: 13px;
-font-weight: 400;
-letter-spacing: 0.01em;
-font-style: italic;
+letter-spacing: 0.02em;
 }
 
-/* ── Cards ── */
 .card {
-background: #13161e;
-border: 1px solid #1e2330;
-border-radius: 20px;
-padding: 26px 24px;
-margin-bottom: 14px;
+background: #161a22;
+border: 1px solid #222733;
+border-radius: 16px;
+padding: 28px;
+margin-bottom: 16px;
+animation: fadeUp 0.6s ease both;
 }
 
 .card-title {
-font-size: 10px;
-font-weight: 700;
-letter-spacing: 0.16em;
+font-size: 11px;
+font-weight: 600;
+letter-spacing: 0.12em;
 text-transform: uppercase;
-color: #3d4555;
-margin-bottom: 22px;
+color: #6b7280;
+margin-bottom: 20px;
 }
 
-/* ── Fields ── */
-.fields { display: flex; flex-direction: column; gap: 16px; }
-.field  { display: flex; flex-direction: column; gap: 8px; }
+.fields { display: flex; flex-direction: column; gap: 14px; }
+.field  { display: flex; flex-direction: column; gap: 7px; }
 
 label {
-font-size: 10.5px;
-font-weight: 700;
-letter-spacing: 0.1em;
+font-size: 11px;
+font-weight: 600;
+letter-spacing: 0.08em;
 text-transform: uppercase;
-color: #4a5368;
+color: #6b7280;
 display: flex;
 align-items: center;
 gap: 8px;
 }
 
 .label-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-.ld-weight { background: #c084fc; box-shadow: 0 0 7px rgba(192,132,252,0.7); }
-.ld-carb   { background: #00e5ff; box-shadow: 0 0 7px rgba(0,229,255,0.7); }
-.ld-prot   { background: #a8ff78; box-shadow: 0 0 7px rgba(168,255,120,0.7); }
-.ld-fat    { background: #ff6b35; box-shadow: 0 0 7px rgba(255,107,53,0.7); }
+.ld-weight { background: #c084fc; box-shadow: 0 0 8px #c084fc; }
+.ld-carb   { background: #00e5ff; box-shadow: 0 0 8px #00e5ff; }
+.ld-prot   { background: #a8ff78; box-shadow: 0 0 8px #a8ff78; }
+.ld-fat    { background: #ff6b35; box-shadow: 0 0 8px #ff6b35; }
 
 .input-wrap { position: relative; display: flex; align-items: center; }
 
 input[type=“number”] {
-background: #0d0f14;
-border: 1px solid #1e2330;
+background: #111318;
+border: 1px solid #222733;
 border-radius: 12px;
 color: #eef0f5;
 font-family: ‘DM Mono’, monospace;
-font-size: 19px;
+font-size: 20px;
 font-weight: 500;
-padding: 13px 56px 13px 16px;
+padding: 14px 58px 14px 18px;
 width: 100%;
 outline: none;
 transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
@@ -175,262 +171,208 @@ input[type=“number”]::-webkit-outer-spin-button,
 input[type=“number”]::-webkit-inner-spin-button { -webkit-appearance: none; }
 
 input[type=“number”]:focus {
-border-color: rgba(0,229,255,0.5);
-box-shadow: 0 0 0 3px rgba(0,229,255,0.08);
-background: #0a0c10;
+border-color: #00e5ff;
+box-shadow: 0 0 0 3px rgba(0,229,255,0.1);
+background: #0e1117;
 }
 
-input[type=“number”]::placeholder { color: #2a3040; }
+input[type=“number”]::placeholder { color: #3a4050; }
 
 .input-unit {
 position: absolute;
-right: 14px;
-font-size: 10px;
-font-weight: 700;
-letter-spacing: 0.08em;
-color: #3d4555;
+right: 16px;
+font-size: 11px;
+font-weight: 600;
+letter-spacing: 0.06em;
+color: #6b7280;
 pointer-events: none;
 font-family: ‘DM Sans’, sans-serif;
 text-transform: uppercase;
 }
 
-.divider { border: none; border-top: 1px solid #1a1f2b; margin: 2px 0; }
+.divider { border: none; border-top: 1px solid #222733; margin: 6px 0; }
 
-/* ── Buttons ── */
-.btn-row {
-display: grid;
-grid-template-columns: 1fr auto;
-gap: 10px;
-margin-top: 24px;
-}
+.btn-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-top: 22px; }
 
 .btn {
 border: none;
 border-radius: 12px;
 font-family: ‘DM Sans’, sans-serif;
 font-size: 15px;
-font-weight: 700;
+font-weight: 600;
 cursor: pointer;
-transition: all 0.18s;
+padding: 15px 24px;
+transition: all 0.2s;
 letter-spacing: 0.02em;
 }
 
 .btn-primary {
 background: #00e5ff;
 color: #000;
-padding: 15px 28px;
 position: relative;
 overflow: hidden;
 }
 
-.btn-primary::after {
+.btn-primary::before {
 content: ‘’;
 position: absolute;
 inset: 0;
-background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 60%);
+background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
 opacity: 0;
-transition: opacity 0.18s;
+transition: opacity 0.2s;
 }
 
-.btn-primary:hover  { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(0,229,255,0.32); }
-.btn-primary:hover::after { opacity: 1; }
-.btn-primary:active { transform: translateY(0); box-shadow: none; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,229,255,0.35); }
+.btn-primary:hover::before { opacity: 1; }
+.btn-primary:active { transform: translateY(0); }
 
 .btn-secondary {
 background: transparent;
-border: 1px solid #1e2330;
-color: #3d4555;
-padding: 15px 20px;
+border: 1px solid #222733;
+color: #6b7280;
+padding: 15px 18px;
 }
 
-.btn-secondary:hover { border-color: #ff6b35; color: #ff6b35; }
+.btn-secondary:hover { border-color: #ff6b35; color: #ff6b35; background: rgba(255,107,53,0.05); }
 
-/* ── Error ── */
 .error-msg {
 display: none;
-background: rgba(255,107,53,0.07);
-border: 1px solid rgba(255,107,53,0.25);
+background: rgba(255,107,53,0.08);
+border: 1px solid rgba(255,107,53,0.3);
 border-radius: 10px;
 padding: 11px 16px;
-font-size: 12.5px;
+font-size: 13px;
 color: #ff6b35;
 margin-top: 12px;
 text-align: center;
 }
 .error-msg.show { display: block; }
 
-/* ── Results ── */
 #results { display: none; }
-#results.visible {
-display: block;
-animation: fadeUp 0.45s ease both;
-}
+#results.visible { display: block; animation: fadeUp 0.5s ease both; }
 
-.macro-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+.macro-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
 
 .macro-row {
-background: #0d0f14;
-border: 1px solid #1a1f2b;
+background: #111318;
+border: 1px solid #222733;
 border-radius: 14px;
-padding: 14px 16px;
+padding: 14px 18px;
 display: grid;
-grid-template-columns: 34px 1fr auto;
+grid-template-columns: 32px 1fr auto;
 align-items: center;
 gap: 12px;
-transition: border-color 0.2s;
 }
-
-.macro-row:hover { border-color: #252c3a; }
 
 .macro-icon {
-width: 34px; height: 34px;
-border-radius: 10px;
+width: 32px; height: 32px;
+border-radius: 9px;
 display: flex; align-items: center; justify-content: center;
-font-size: 15px; flex-shrink: 0;
+font-size: 14px; flex-shrink: 0;
 }
 
-.macro-icon.carb { background: rgba(0,229,255,0.09); }
-.macro-icon.prot { background: rgba(168,255,120,0.09); }
-.macro-icon.fat  { background: rgba(255,107,53,0.09); }
+.macro-icon.carb { background: rgba(0,229,255,0.1); }
+.macro-icon.prot { background: rgba(168,255,120,0.1); }
+.macro-icon.fat  { background: rgba(255,107,53,0.1); }
 
 .macro-name {
-font-size: 10px; font-weight: 700;
-text-transform: uppercase; letter-spacing: 0.1em;
-color: #3d4555; margin-bottom: 4px;
+font-size: 11px; font-weight: 600;
+text-transform: uppercase; letter-spacing: 0.08em;
+color: #6b7280; margin-bottom: 3px;
 }
 
 .macro-detail {
 font-family: ‘DM Mono’, monospace;
-font-size: 13.5px;
-color: #c8cdd8;
-display: flex;
-align-items: center;
-gap: 0;
-flex-wrap: wrap;
+font-size: 13px; color: #eef0f5;
 }
 
-.sep {
-color: #252c3a;
-margin: 0 6px;
-font-size: 12px;
-}
+.sep { color: #2a3040; margin: 0 5px; }
 
 .macro-sub {
 font-family: ‘DM Mono’, monospace;
-font-size: 10.5px;
-color: #2a3040;
-margin-top: 3px;
+font-size: 11px; color: #3a4050; margin-top: 2px;
 }
 
 .macro-pct {
 font-family: ‘DM Mono’, monospace;
-font-size: 18px;
-font-weight: 500;
-text-align: right;
-min-width: 52px;
+font-size: 17px; font-weight: 600; text-align: right;
 }
 
 .pct-carb { color: #00e5ff; }
 .pct-prot { color: #a8ff78; }
 .pct-fat  { color: #ff6b35; }
 
-/* ── Bar ── */
 .bar-container {
-background: #0d0f14;
-border: 1px solid #1a1f2b;
+background: #111318;
+border: 1px solid #222733;
 border-radius: 14px;
-padding: 18px 16px;
-margin-bottom: 14px;
+padding: 18px; margin-bottom: 16px;
 }
 
 .bar-label {
-font-size: 10px; font-weight: 700;
-text-transform: uppercase; letter-spacing: 0.14em;
-color: #3d4555; margin-bottom: 12px;
+font-size: 11px; font-weight: 600;
+text-transform: uppercase; letter-spacing: 0.1em;
+color: #6b7280; margin-bottom: 10px;
 }
 
 .bar-track {
-height: 7px;
-background: #181c26;
-border-radius: 99px;
-overflow: hidden;
-display: flex;
-margin-bottom: 12px;
-gap: 1px;
+height: 8px; background: #1a1e28;
+border-radius: 99px; overflow: hidden;
+display: flex; margin-bottom: 10px;
 }
 
-.bar-seg { height: 100%; transition: width 0.75s cubic-bezier(0.34, 1.4, 0.64, 1); border-radius: 99px; }
-.bar-seg.carb { background: linear-gradient(90deg, #00bcd4, #00e5ff); }
-.bar-seg.prot { background: linear-gradient(90deg, #76c442, #a8ff78); }
-.bar-seg.fat  { background: linear-gradient(90deg, #e04e1a, #ff6b35); }
+.bar-seg { height: 100%; transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.bar-seg.carb { background: #00e5ff; }
+.bar-seg.prot { background: #a8ff78; }
+.bar-seg.fat  { background: #ff6b35; }
 
-.bar-legend { display: flex; gap: 16px; flex-wrap: wrap; }
+.bar-legend { display: flex; gap: 14px; flex-wrap: wrap; }
 
 .legend-item {
-display: flex; align-items: center; gap: 6px;
-font-size: 11px; color: #3d4555; font-weight: 500;
+display: flex; align-items: center; gap: 5px;
+font-size: 11px; color: #6b7280; font-weight: 500;
 }
 
 .legend-dot { width: 7px; height: 7px; border-radius: 50%; }
 
-/* ── Total ── */
 .total-card {
-background: linear-gradient(135deg, rgba(0,229,255,0.07) 0%, rgba(0,229,255,0.01) 100%);
-border: 1px solid rgba(0,229,255,0.14);
-border-radius: 18px;
-padding: 28px 24px;
-text-align: center;
-position: relative;
-overflow: hidden;
-}
-
-.total-card::before {
-content: ‘’;
-position: absolute;
-top: -40px; left: 50%;
-transform: translateX(-50%);
-width: 200px; height: 80px;
-background: rgba(0,229,255,0.06);
-border-radius: 50%;
-filter: blur(20px);
-pointer-events: none;
+background: linear-gradient(135deg, rgba(0,229,255,0.08), rgba(0,229,255,0.02));
+border: 1px solid rgba(0,229,255,0.2);
+border-radius: 16px;
+padding: 24px; text-align: center;
 }
 
 .total-label {
-font-size: 10px; font-weight: 700;
-letter-spacing: 0.16em; text-transform: uppercase;
-color: #00e5ff; margin-bottom: 8px;
+font-size: 11px; font-weight: 600;
+letter-spacing: 0.12em; text-transform: uppercase;
+color: #00e5ff; margin-bottom: 6px;
 }
 
 .total-val {
 font-family: ‘Bebas Neue’, sans-serif;
-font-size: 58px; letter-spacing: 0.03em;
-color: #ffffff; line-height: 1;
+font-size: 52px; letter-spacing: 0.04em;
+color: #fff; line-height: 1;
 }
 
 .total-unit {
 font-family: ‘DM Mono’, monospace;
-font-size: 12px; color: #3d4555; margin-top: 6px;
-letter-spacing: 0.06em;
+font-size: 13px; color: #6b7280; margin-top: 4px;
 }
 
-/* ── Animations ── */
 @keyframes fadeDown {
-from { opacity: 0; transform: translateY(-18px); }
+from { opacity: 0; transform: translateY(-20px); }
 to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeUp {
-from { opacity: 0; transform: translateY(18px); }
+from { opacity: 0; transform: translateY(20px); }
 to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Footer ── */
 footer {
-margin-top: 48px; text-align: center;
-font-size: 11px; color: #1e2330;
+margin-top: 40px; text-align: center;
+font-size: 12px; color: #2a3040;
 position: relative; z-index: 1;
-letter-spacing: 0.04em;
 }
 </style>
 
@@ -448,7 +390,6 @@ letter-spacing: 0.04em;
     <p class="card-title">Dados de entrada</p>
     <div class="fields">
 
-```
   <div class="field">
     <label><span class="label-dot ld-weight"></span>Peso corporal</label>
     <div class="input-wrap">
@@ -501,7 +442,6 @@ letter-spacing: 0.04em;
 
 ```
   <div class="macro-grid">
-
     <div class="macro-row">
       <div class="macro-icon carb">&#127806;</div>
       <div>
@@ -509,7 +449,7 @@ letter-spacing: 0.04em;
         <div class="macro-detail" id="res-carb-detail">&#8212;</div>
         <div class="macro-sub" id="res-carb-sub"></div>
       </div>
-      <div class="macro-pct pct-carb" id="res-carb-pct">&#8212;</div>
+      <div class="macro-pct pct-carb" id="res-carb-pct">&#8212;%</div>
     </div>
 
     <div class="macro-row">
@@ -519,7 +459,7 @@ letter-spacing: 0.04em;
         <div class="macro-detail" id="res-prot-detail">&#8212;</div>
         <div class="macro-sub" id="res-prot-sub"></div>
       </div>
-      <div class="macro-pct pct-prot" id="res-prot-pct">&#8212;</div>
+      <div class="macro-pct pct-prot" id="res-prot-pct">&#8212;%</div>
     </div>
 
     <div class="macro-row">
@@ -529,9 +469,8 @@ letter-spacing: 0.04em;
         <div class="macro-detail" id="res-fat-detail">&#8212;</div>
         <div class="macro-sub" id="res-fat-sub"></div>
       </div>
-      <div class="macro-pct pct-fat" id="res-fat-pct">&#8212;</div>
+      <div class="macro-pct pct-fat" id="res-fat-pct">&#8212;%</div>
     </div>
-
   </div>
 
   <div class="bar-container">
@@ -553,9 +492,7 @@ letter-spacing: 0.04em;
     <div class="total-val" id="total-kcal">0</div>
     <div class="total-unit">kcal / dia</div>
   </div>
-
 </div>
-```
 
   </div>
 
@@ -564,83 +501,78 @@ letter-spacing: 0.04em;
 <footer>Dieta dos Macros &copy; 2025 &mdash; Calculadora de Macronutrientes</footer>
 
 <script>
-function fmtDec(n) {
-  return Number(n).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
-}
-function fmtInt(n) {
-  return Math.round(n).toLocaleString('pt-BR');
-}
-
-function calculate() {
-  var w  = parseFloat(document.getElementById('weight').value)  || 0;
-  var cr = parseFloat(document.getElementById('carbs').value)   || 0;
-  var pr = parseFloat(document.getElementById('protein').value) || 0;
-  var fr = parseFloat(document.getElementById('fat').value)     || 0;
-  var err = document.getElementById('error');
-
-  if (w <= 0 || (cr === 0 && pr === 0 && fr === 0)) {
-    err.classList.add('show');
-    return;
+  function fmtDec(n) {
+    return Number(n).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
   }
-  err.classList.remove('show');
-
-  var cG = cr * w;
-  var pG = pr * w;
-  var fG = fr * w;
-
-  var cKcal = cG * 4;
-  var pKcal = pG * 4;
-  var fKcal = fG * 9;
-  var total = cKcal + pKcal + fKcal;
-
-  var cPct = total > 0 ? (cKcal / total * 100) : 0;
-  var pPct = total > 0 ? (pKcal / total * 100) : 0;
-  var fPct = total > 0 ? (fKcal / total * 100) : 0;
-
-  function setMacro(prefix, grams, kcal, pct, ratio, weight) {
-    document.getElementById('res-' + prefix + '-detail').innerHTML =
-      fmtDec(grams) + 'g' +
-      '<span class="sep">&middot;</span>' +
-      fmtInt(kcal) + ' kcal';
-    document.getElementById('res-' + prefix + '-sub').textContent =
-      ratio > 0 ? fmtDec(ratio) + ' g/kg x ' + fmtDec(weight) + ' kg' : '';
-    document.getElementById('res-' + prefix + '-pct').textContent =
-      pct.toFixed(1) + '%';
+  function fmtInt(n) {
+    return Math.round(n).toLocaleString('pt-BR');
   }
 
-  setMacro('carb', cG, cKcal, cPct, cr, w);
-  setMacro('prot', pG, pKcal, pPct, pr, w);
-  setMacro('fat',  fG, fKcal, fPct, fr, w);
+  function calculate() {
+    var w  = parseFloat(document.getElementById('weight').value)  || 0;
+    var cr = parseFloat(document.getElementById('carbs').value)   || 0;
+    var pr = parseFloat(document.getElementById('protein').value) || 0;
+    var fr = parseFloat(document.getElementById('fat').value)     || 0;
+    var err = document.getElementById('error');
 
-  document.getElementById('total-kcal').textContent = fmtInt(total);
+    if (w <= 0 || (cr === 0 && pr === 0 && fr === 0)) {
+      err.classList.add('show');
+      return;
+    }
+    err.classList.remove('show');
 
-  setTimeout(function() {
-    document.getElementById('bar-carb').style.width = cPct + '%';
-    document.getElementById('bar-prot').style.width = pPct + '%';
-    document.getElementById('bar-fat').style.width  = fPct + '%';
-  }, 60);
+    var cG = cr * w;
+    var pG = pr * w;
+    var fG = fr * w;
 
-  var results = document.getElementById('results');
-  results.classList.add('visible');
-  setTimeout(function() {
+    var cKcal = cG * 4;
+    var pKcal = pG * 4;
+    var fKcal = fG * 9;
+    var total = cKcal + pKcal + fKcal;
+
+    var cPct = total > 0 ? (cKcal / total * 100) : 0;
+    var pPct = total > 0 ? (pKcal / total * 100) : 0;
+    var fPct = total > 0 ? (fKcal / total * 100) : 0;
+
+    function setMacro(prefix, grams, kcal, pct, ratio, weight) {
+      document.getElementById('res-' + prefix + '-detail').innerHTML =
+        fmtDec(grams) + 'g<span class="sep">&middot;</span>' + fmtInt(kcal) + ' kcal';
+      document.getElementById('res-' + prefix + '-sub').textContent =
+        ratio > 0 ? fmtDec(ratio) + ' g/kg x ' + fmtDec(weight) + ' kg' : '';
+      document.getElementById('res-' + prefix + '-pct').textContent = pct.toFixed(1) + '%';
+    }
+
+    setMacro('carb', cG, cKcal, cPct, cr, w);
+    setMacro('prot', pG, pKcal, pPct, pr, w);
+    setMacro('fat',  fG, fKcal, fPct, fr, w);
+
+    document.getElementById('total-kcal').textContent = fmtInt(total);
+
+    setTimeout(function() {
+      document.getElementById('bar-carb').style.width = cPct + '%';
+      document.getElementById('bar-prot').style.width = pPct + '%';
+      document.getElementById('bar-fat').style.width  = fPct + '%';
+    }, 50);
+
+    var results = document.getElementById('results');
+    results.classList.add('visible');
     results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }, 80);
-}
+  }
 
-function resetAll() {
-  ['weight','carbs','protein','fat'].forEach(function(id) {
-    document.getElementById(id).value = '';
-  });
-  document.getElementById('error').classList.remove('show');
-  document.getElementById('results').classList.remove('visible');
-  ['bar-carb','bar-prot','bar-fat'].forEach(function(id) {
-    document.getElementById(id).style.width = '0%';
-  });
-}
+  function resetAll() {
+    ['weight','carbs','protein','fat'].forEach(function(id) {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('error').classList.remove('show');
+    document.getElementById('results').classList.remove('visible');
+    ['bar-carb','bar-prot','bar-fat'].forEach(function(id) {
+      document.getElementById(id).style.width = '0%';
+    });
+  }
 
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') calculate();
-});
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') calculate();
+  });
 </script>
 
 </body>
