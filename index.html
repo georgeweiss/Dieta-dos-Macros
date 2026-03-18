@@ -1,58 +1,585 @@
-<html>
-  <head>
-    <script>
-      function calcularMacronutrientes() {
-        // Obtém o peso do usuário
-        var peso = parseFloat(document.getElementById("peso").value);
+<!DOCTYPE html>
 
-        // Obtém as proporções diárias de carboidratos, proteínas e gorduras
-        var proporcaoCarboidratos = parseFloat(document.getElementById("carboidratos").value);
-        var proporcaoProteinas = parseFloat(document.getElementById("proteinas").value);
-        var proporcaoGorduras = parseFloat(document.getElementById("gorduras").value);
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dieta dos Macros — Calculadora</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        // Calcula as gramas de carboidratos, proteínas e gorduras
-        var gramasCarboidratos = peso * proporcaoCarboidratos;
-        var gramasProteinas = peso * proporcaoProteinas;
-        var gramasGorduras = peso * proporcaoGorduras;
+:root {
+–bg: #0a0b0d;
+–surface: #111318;
+–card: #161a22;
+–border: #222733;
+–accent: #00e5ff;
+–accent2: #ff6b35;
+–protein: #a8ff78;
+–carb: #00e5ff;
+–fat: #ff6b35;
+–text: #eef0f5;
+–muted: #6b7280;
+–radius: 16px;
+}
 
-        // Calcula as kcal de carboidratos, proteínas e gorduras
-        var kcalCarboidratos = gramasCarboidratos * 4;
-        var kcalProteinas = gramasProteinas * 4;
-        var kcalGorduras = gramasGorduras * 9;
+body {
+font-family: ‘DM Sans’, sans-serif;
+background: var(–bg);
+color: var(–text);
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 40px 20px 80px;
+position: relative;
+overflow-x: hidden;
+}
 
-        // Calcula o total de kcal
-        var totalKcal = kcalCarboidratos + kcalProteinas + kcalGorduras;
+body::before {
+content: ‘’;
+position: fixed;
+inset: 0;
+background-image:
+linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+background-size: 40px 40px;
+pointer-events: none;
+z-index: 0;
+}
 
-        // Calcula as porcentagens de carboidratos, proteínas e gorduras
-        var porcentagemCarboidratos = (kcalCarboidratos / totalKcal) * 100;
-        var porcentagemProteinas = (kcalProteinas / totalKcal) * 100;
-        var porcentagemGorduras = (kcalGorduras / totalKcal) * 100;
+body::after {
+content: ‘’;
+position: fixed;
+top: -200px;
+left: 50%;
+transform: translateX(-50%);
+width: 700px;
+height: 700px;
+background: radial-gradient(circle, rgba(0,229,255,0.07) 0%, transparent 70%);
+pointer-events: none;
+z-index: 0;
+}
 
-        // Exibe o resultado
-        document.getElementById("resultado").innerHTML =
-          "Carboidratos: " + gramasCarboidratos.toFixed(2) + "g / " + kcalCarboidratos.toFixed(2) + "kcal / " + porcentagemCarboidratos.toFixed(2) + "%<br>" +
-          "Proteínas: " + gramasProteinas.toFixed(2) + "g / " + kcalProteinas.toFixed(2) + "kcal / " + porcentagemProteinas.toFixed(2) + "%<br>" +
-          "Gorduras: " + gramasGorduras.toFixed(2) + "g / " + kcalGorduras.toFixed(2) + "kcal / " + porcentagemGorduras.toFixed(2) + "%";
-      }
-    </script>
-  </head>
-  <body>
-    <h1>Dieta dos Macros</h1>
-    <p>
-      Peso (kg): <input type="text" id="peso">
-</p>
-    <p>
-      Carboidratos: <input type="text" id="carboidratos">
-    </p>
-    <p>
-      Proteínas: <input type="text" id="proteinas">
-    </p>
-    <p>
-      Gorduras: <input type="text" id="gorduras">
-    </p>
-    <p>
-      <button onclick="calcularMacronutrientes()">Calcular</button>
-    </p>
-    <p id="resultado"></p>
-  </body>
+.wrapper {
+width: 100%;
+max-width: 480px;
+position: relative;
+z-index: 1;
+}
+
+header {
+text-align: center;
+margin-bottom: 40px;
+animation: fadeDown 0.6s ease both;
+}
+
+.logo-tag {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+background: rgba(0,229,255,0.08);
+border: 1px solid rgba(0,229,255,0.2);
+border-radius: 99px;
+padding: 6px 16px;
+font-size: 11px;
+font-weight: 600;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(–accent);
+margin-bottom: 20px;
+}
+
+.logo-dot {
+width: 6px; height: 6px;
+border-radius: 50%;
+background: var(–accent);
+box-shadow: 0 0 8px var(–accent);
+animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+0%, 100% { opacity: 1; transform: scale(1); }
+50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+h1 {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: clamp(42px, 10vw, 64px);
+letter-spacing: 0.04em;
+line-height: 0.95;
+background: linear-gradient(135deg, #fff 30%, var(–accent) 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+margin-bottom: 10px;
+}
+
+.subtitle {
+color: var(–muted);
+font-size: 13px;
+letter-spacing: 0.02em;
+}
+
+.card {
+background: var(–card);
+border: 1px solid var(–border);
+border-radius: var(–radius);
+padding: 28px;
+margin-bottom: 16px;
+animation: fadeUp 0.6s ease both;
+}
+
+.card-title {
+font-size: 11px;
+font-weight: 600;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(–muted);
+margin-bottom: 20px;
+}
+
+.fields { display: flex; flex-direction: column; gap: 14px; }
+
+.field { display: flex; flex-direction: column; gap: 7px; }
+
+label {
+font-size: 11px;
+font-weight: 600;
+letter-spacing: 0.08em;
+text-transform: uppercase;
+color: var(–muted);
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.label-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.ld-weight { background: #c084fc; box-shadow: 0 0 8px #c084fc; }
+.ld-carb   { background: var(–carb);    box-shadow: 0 0 8px var(–carb); }
+.ld-prot   { background: var(–protein); box-shadow: 0 0 8px var(–protein); }
+.ld-fat    { background: var(–fat);     box-shadow: 0 0 8px var(–fat); }
+
+.input-wrap { position: relative; display: flex; align-items: center; }
+
+input[type=“number”] {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 12px;
+color: var(–text);
+font-family: ‘DM Mono’, monospace;
+font-size: 20px;
+font-weight: 500;
+padding: 14px 58px 14px 18px;
+width: 100%;
+outline: none;
+transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+-moz-appearance: textfield;
+}
+
+input[type=“number”]::-webkit-outer-spin-button,
+input[type=“number”]::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+input[type=“number”]:focus {
+border-color: var(–accent);
+box-shadow: 0 0 0 3px rgba(0,229,255,0.1);
+background: #0e1117;
+}
+
+input[type=“number”]::placeholder { color: #3a4050; }
+
+.input-unit {
+position: absolute;
+right: 16px;
+font-size: 11px;
+font-weight: 600;
+letter-spacing: 0.06em;
+color: var(–muted);
+pointer-events: none;
+font-family: ‘DM Sans’, sans-serif;
+text-transform: uppercase;
+}
+
+.divider { border: none; border-top: 1px solid var(–border); margin: 6px 0; }
+
+.btn-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-top: 22px; }
+
+.btn {
+border: none;
+border-radius: 12px;
+font-family: ‘DM Sans’, sans-serif;
+font-size: 15px;
+font-weight: 600;
+cursor: pointer;
+padding: 15px 24px;
+transition: all 0.2s;
+letter-spacing: 0.02em;
+}
+
+.btn-primary {
+background: var(–accent);
+color: #000;
+position: relative;
+overflow: hidden;
+}
+
+.btn-primary::before {
+content: ‘’;
+position: absolute;
+inset: 0;
+background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+opacity: 0;
+transition: opacity 0.2s;
+}
+
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,229,255,0.35); }
+.btn-primary:hover::before { opacity: 1; }
+.btn-primary:active { transform: translateY(0); }
+
+.btn-secondary {
+background: transparent;
+border: 1px solid var(–border);
+color: var(–muted);
+padding: 15px 18px;
+}
+
+.btn-secondary:hover { border-color: var(–accent2); color: var(–accent2); background: rgba(255,107,53,0.05); }
+
+.error-msg {
+display: none;
+background: rgba(255,107,53,0.08);
+border: 1px solid rgba(255,107,53,0.3);
+border-radius: 10px;
+padding: 11px 16px;
+font-size: 13px;
+color: var(–accent2);
+margin-top: 12px;
+text-align: center;
+}
+.error-msg.show { display: block; }
+
+/* Results */
+#results { display: none; }
+#results.visible { display: block; animation: fadeUp 0.5s ease both; }
+
+.macro-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+
+.macro-row {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 14px;
+padding: 14px 18px;
+display: grid;
+grid-template-columns: 32px 1fr auto;
+align-items: center;
+gap: 12px;
+}
+
+.macro-icon {
+width: 32px; height: 32px;
+border-radius: 9px;
+display: flex; align-items: center; justify-content: center;
+font-size: 14px; flex-shrink: 0;
+}
+
+.macro-icon.carb { background: rgba(0,229,255,0.1); }
+.macro-icon.prot { background: rgba(168,255,120,0.1); }
+.macro-icon.fat  { background: rgba(255,107,53,0.1); }
+
+.macro-name {
+font-size: 11px; font-weight: 600;
+text-transform: uppercase; letter-spacing: 0.08em;
+color: var(–muted); margin-bottom: 3px;
+}
+
+.macro-detail {
+font-family: ‘DM Mono’, monospace;
+font-size: 13px; color: var(–text);
+}
+
+.macro-detail .sep { color: #2a3040; margin: 0 5px; }
+
+.macro-sub {
+font-family: ‘DM Mono’, monospace;
+font-size: 11px; color: #3a4050; margin-top: 2px;
+}
+
+.macro-pct {
+font-family: ‘DM Mono’, monospace;
+font-size: 17px; font-weight: 600; text-align: right;
+}
+
+.pct-carb { color: var(–carb); }
+.pct-prot { color: var(–protein); }
+.pct-fat  { color: var(–fat); }
+
+.bar-container {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 14px;
+padding: 18px; margin-bottom: 16px;
+}
+
+.bar-label {
+font-size: 11px; font-weight: 600;
+text-transform: uppercase; letter-spacing: 0.1em;
+color: var(–muted); margin-bottom: 10px;
+}
+
+.bar-track {
+height: 8px; background: #1a1e28;
+border-radius: 99px; overflow: hidden;
+display: flex; margin-bottom: 10px;
+}
+
+.bar-seg { height: 100%; transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.bar-seg.carb { background: var(–carb); }
+.bar-seg.prot { background: var(–protein); }
+.bar-seg.fat  { background: var(–fat); }
+
+.bar-legend { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.legend-item {
+display: flex; align-items: center; gap: 5px;
+font-size: 11px; color: var(–muted); font-weight: 500;
+}
+
+.legend-dot { width: 7px; height: 7px; border-radius: 50%; }
+
+.total-card {
+background: linear-gradient(135deg, rgba(0,229,255,0.08), rgba(0,229,255,0.02));
+border: 1px solid rgba(0,229,255,0.2);
+border-radius: 16px;
+padding: 24px; text-align: center;
+}
+
+.total-label {
+font-size: 11px; font-weight: 600;
+letter-spacing: 0.12em; text-transform: uppercase;
+color: var(–accent); margin-bottom: 6px;
+}
+
+.total-val {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 52px; letter-spacing: 0.04em;
+color: #fff; line-height: 1;
+}
+
+.total-unit { font-family: ‘DM Mono’, monospace; font-size: 13px; color: var(–muted); margin-top: 4px; }
+
+@keyframes fadeDown {
+from { opacity: 0; transform: translateY(-20px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(20px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+
+footer {
+margin-top: 40px; text-align: center;
+font-size: 12px; color: #2a3040;
+position: relative; z-index: 1;
+}
+</style>
+
+</head>
+<body>
+<div class="wrapper">
+
+  <header>
+    <div class="logo-tag"><span class="logo-dot"></span>Dieta dos Macros</div>
+    <h1>CALCULADORA<br>DE MACROS</h1>
+    <p class="subtitle">Informe seu peso e os gramas por kg de cada macro</p>
+  </header>
+
+  <div class="card">
+    <p class="card-title">Dados de entrada</p>
+    <div class="fields">
+
+```
+  <div class="field">
+    <label><span class="label-dot ld-weight"></span>Peso corporal</label>
+    <div class="input-wrap">
+      <input type="number" id="weight" placeholder="0" min="0" step="0.1">
+      <span class="input-unit">kg</span>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="field">
+    <label><span class="label-dot ld-carb"></span>Carboidratos</label>
+    <div class="input-wrap">
+      <input type="number" id="carbs" placeholder="0" min="0" step="0.1">
+      <span class="input-unit">g/kg</span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label><span class="label-dot ld-prot"></span>Proteínas</label>
+    <div class="input-wrap">
+      <input type="number" id="protein" placeholder="0" min="0" step="0.1">
+      <span class="input-unit">g/kg</span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label><span class="label-dot ld-fat"></span>Gorduras</label>
+    <div class="input-wrap">
+      <input type="number" id="fat" placeholder="0" min="0" step="0.1">
+      <span class="input-unit">g/kg</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="btn-row">
+  <button class="btn btn-primary" onclick="calculate()">Calcular →</button>
+  <button class="btn btn-secondary" onclick="resetAll()">Limpar</button>
+</div>
+
+<div class="error-msg" id="error">Preencha o peso e ao menos um macronutriente.</div>
+```
+
+  </div>
+
+  <div id="results">
+    <div class="card">
+      <p class="card-title">Resultado</p>
+
+```
+  <div class="macro-grid">
+    <div class="macro-row">
+      <div class="macro-icon carb">🌾</div>
+      <div>
+        <div class="macro-name">Carboidratos</div>
+        <div class="macro-detail" id="res-carb-detail">—</div>
+        <div class="macro-sub"    id="res-carb-sub"></div>
+      </div>
+      <div class="macro-pct pct-carb" id="res-carb-pct">—%</div>
+    </div>
+
+    <div class="macro-row">
+      <div class="macro-icon prot">💪</div>
+      <div>
+        <div class="macro-name">Proteínas</div>
+        <div class="macro-detail" id="res-prot-detail">—</div>
+        <div class="macro-sub"    id="res-prot-sub"></div>
+      </div>
+      <div class="macro-pct pct-prot" id="res-prot-pct">—%</div>
+    </div>
+
+    <div class="macro-row">
+      <div class="macro-icon fat">🥑</div>
+      <div>
+        <div class="macro-name">Gorduras</div>
+        <div class="macro-detail" id="res-fat-detail">—</div>
+        <div class="macro-sub"    id="res-fat-sub"></div>
+      </div>
+      <div class="macro-pct pct-fat" id="res-fat-pct">—%</div>
+    </div>
+  </div>
+
+  <div class="bar-container">
+    <div class="bar-label">Distribuição calórica</div>
+    <div class="bar-track">
+      <div class="bar-seg carb" id="bar-carb" style="width:0%"></div>
+      <div class="bar-seg prot" id="bar-prot" style="width:0%"></div>
+      <div class="bar-seg fat"  id="bar-fat"  style="width:0%"></div>
+    </div>
+    <div class="bar-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--carb)"></div>Carboidratos</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--protein)"></div>Proteínas</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--fat)"></div>Gorduras</div>
+    </div>
+  </div>
+
+  <div class="total-card">
+    <div class="total-label">Total de Calorias</div>
+    <div class="total-val" id="total-kcal">0</div>
+    <div class="total-unit">kcal / dia</div>
+  </div>
+</div>
+```
+
+  </div>
+
+</div>
+
+<footer>Dieta dos Macros &copy; 2025 — Calculadora de Macronutrientes</footer>
+
+<script>
+  function fmtDec(n) {
+    return Number(n).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  }
+  function fmtInt(n) {
+    return Math.round(n).toLocaleString('pt-BR');
+  }
+
+  function calculate() {
+    const w  = parseFloat(document.getElementById('weight').value)  || 0;
+    const cr = parseFloat(document.getElementById('carbs').value)   || 0;
+    const pr = parseFloat(document.getElementById('protein').value) || 0;
+    const fr = parseFloat(document.getElementById('fat').value)     || 0;
+    const err = document.getElementById('error');
+
+    if (w <= 0 || (cr === 0 && pr === 0 && fr === 0)) {
+      err.classList.add('show');
+      return;
+    }
+    err.classList.remove('show');
+
+    // Total grams = ratio (g/kg) × body weight (kg)
+    const cG = cr * w;
+    const pG = pr * w;
+    const fG = fr * w;
+
+    // Calories: carbs & protein = 4 kcal/g · fat = 9 kcal/g
+    const cKcal = cG * 4;
+    const pKcal = pG * 4;
+    const fKcal = fG * 9;
+    const total = cKcal + pKcal + fKcal;
+
+    const cPct = total > 0 ? (cKcal / total * 100) : 0;
+    const pPct = total > 0 ? (pKcal / total * 100) : 0;
+    const fPct = total > 0 ? (fKcal / total * 100) : 0;
+
+    function setMacro(prefix, grams, kcal, pct, ratio, weight) {
+      document.getElementById('res-' + prefix + '-detail').innerHTML =
+        `${fmtDec(grams)}g<span class="sep">·</span>${fmtInt(kcal)} kcal`;
+      document.getElementById('res-' + prefix + '-sub').textContent =
+        ratio > 0 ? `${fmtDec(ratio)} g/kg × ${fmtDec(weight)} kg` : '';
+      document.getElementById('res-' + prefix + '-pct').textContent = pct.toFixed(1) + '%';
+    }
+
+    setMacro('carb', cG, cKcal, cPct, cr, w);
+    setMacro('prot', pG, pKcal, pPct, pr, w);
+    setMacro('fat',  fG, fKcal, fPct, fr, w);
+
+    document.getElementById('total-kcal').textContent = fmtInt(total);
+
+    setTimeout(() => {
+      document.getElementById('bar-carb').style.width = cPct + '%';
+      document.getElementById('bar-prot').style.width = pPct + '%';
+      document.getElementById('bar-fat').style.width  = fPct + '%';
+    }, 50);
+
+    const results = document.getElementById('results');
+    results.classList.add('visible');
+    results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function resetAll() {
+    ['weight','carbs','protein','fat'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('error').classList.remove('show');
+    document.getElementById('results').classList.remove('visible');
+    ['bar-carb','bar-prot','bar-fat'].forEach(id => document.getElementById(id).style.width = '0%');
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+</script>
+
+</body>
 </html>
